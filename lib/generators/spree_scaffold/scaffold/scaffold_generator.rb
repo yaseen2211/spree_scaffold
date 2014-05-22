@@ -39,7 +39,7 @@ module SpreeScaffold
       def create_routes
         append_file 'config/routes.rb',
 <<-eos
-Spree::Core::Engine.add_routes do
+Spree::Core::Engine.routes.prepend do
   namespace :admin do
     resources :#{plural_name}
   end
