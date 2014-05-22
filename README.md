@@ -10,7 +10,7 @@ Installation
 
 Add this line to your application's Gemfile:
 ```ruby
-gem 'spree_scaffold', github: 'freego/spree_scaffold', branch: '2-2-stable'
+gem 'spree_scaffold', github: 'freego/spree_scaffold', branch: '2-0-stable'
 ```
 
 And then execute:
