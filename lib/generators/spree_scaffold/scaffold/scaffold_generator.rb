@@ -38,12 +38,12 @@ module SpreeScaffold
 
       def create_locale
         %w(en it).each do |locale|
-          template "locales/#{locale}.yml", "config/locales/#{locale}_#{plural_name}.yml"
+          template "locales/#{locale}.yml", "config/locales/#{plural_name}.#{locale}.yml"
         end
       end
 
       def create_deface_override
-        template 'overrides/add_to_admin_menu.html.erb.deface', "app/overrides/spree/admin/shared/_menu/add_spree_#{plural_name}.html.erb.deface"
+        template 'overrides/add_to_admin_menu.html.erb.deface', "app/overrides/spree/layouts/admin/add_spree_#{plural_name}.html.erb.deface"
       end
 
       def create_routes

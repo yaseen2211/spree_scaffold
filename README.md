@@ -11,7 +11,7 @@ Installation
 Add this line to your application's Gemfile:
 ```ruby
 group :development do
-  gem 'spree_scaffold', github: 'freego/spree_scaffold', branch: '2-X-stable'
+  gem 'spree_scaffold', github: 'freego/spree_scaffold', branch: 'X-X-stable'
 end
 ```
 
@@ -26,7 +26,9 @@ Generate a scaffold for the new `Brand` model:
 
     $ rails generate spree_scaffold:scaffold Brand name:string description:text position:integer ...
 
-The first attribute is expected to be the "main" one (name, title etc.)
+And adjust the [glyphicons](http://glyphicons.com/) icon name on the `app/overrides/spree/admin/add_spree_...` file.
+
+It's better if the first attribute is the "main" one (name, title etc.)
 
 Some more magic:
 * The admin index list will be sortable with drag&drop if you create a `position:integer` field
