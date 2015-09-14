@@ -1,5 +1,5 @@
 module Spree
-  class <%= class_name %> < ActiveRecord::Base
+  class <%= class_name %> < Spree::Base
 <% if sortable? -%>
     acts_as_list
 
