@@ -51,22 +51,24 @@ module SpreeScaffold
       end
 
       protected
-        def sortable?
-          self.attributes.find { |a| a.name == 'position' && a.type == :integer }
-        end
 
-        def has_attachments?
-          self.attributes.find { |a| a.type == :image || a.type == :file }
-        end
+      def sortable?
+        self.attributes.find { |a| a.name == 'position' && a.type == :integer }
+      end
 
-        def slugged?
-          self.attributes.find { |a| a.name == 'slug' && a.type == :string }
-        end
+      def has_attachments?
+        self.attributes.find { |a| a.type == :image || a.type == :file }
+      end
+
+      def slugged?
+        self.attributes.find { |a| a.name == 'slug' && a.type == :string }
+      end
 
       private
-        def routes_text
-          if sortable?
-<<-eos
+
+      def routes_text
+        if sortable?
+<<-EOS
 
 Spree::Core::Engine.add_routes do
   namespace :admin do
@@ -77,18 +79,18 @@ Spree::Core::Engine.add_routes do
     end
   end
 end
-eos
-          else
-<<-eos
+EOS
+        else
+<<-EOS
 
 Spree::Core::Engine.add_routes do
   namespace :admin do
     resources :#{plural_name}
   end
 end
-eos
-          end
+EOS
         end
+      end
     end
   end
 end
