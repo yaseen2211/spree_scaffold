@@ -9,6 +9,11 @@ module Spree
     friendly_id :slug_candidates, use: [:slugged, :finders]
 
 <% end -%>
+<% if i18n? -%>
+    translates <%= options[:i18n].map { |f| ":#{f}" }.join(', ') %>
+    include SpreeI18n::Translatable
+
+<% end -%>
 <% attributes.each do |attribute| -%>
 <% if attribute.type == :image -%>
     has_attached_file :<%= attribute.name %>,

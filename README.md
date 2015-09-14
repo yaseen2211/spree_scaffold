@@ -1,9 +1,10 @@
 SpreeScaffold
 =============
 
-A basic admin scaffold generator for Spree.
+An advanced admin scaffold generator for Spree.
 
 Creates a ready to use CRUD interface for your models inside Spree admin.
+Attachments, sorting and translations are supported.
 
 Installation
 ============
@@ -24,11 +25,11 @@ Usage
 
 Generate a scaffold for the new `Brand` model:
 
-    $ rails generate spree_scaffold:scaffold Brand name:string description:text position:integer ...
+    $ rails generate spree_scaffold:scaffold Brand name:string description:text position:integer ... [--i18n name description]
 
 And adjust the [glyphicons](http://glyphicons.com/) icon name on the `app/overrides/spree/admin/add_spree_...` file.
 
-It's better if the first attribute is the "main" one (name, title etc.)
+It's better if the first attribute is the "main" text one (name, title etc.)
 
 Some more magic:
 * The admin index list will be sortable with drag&drop if you create a `position:integer` field

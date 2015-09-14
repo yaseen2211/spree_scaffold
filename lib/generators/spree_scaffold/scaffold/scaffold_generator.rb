@@ -8,6 +8,7 @@ module SpreeScaffold
       source_root File.expand_path('../../templates', __FILE__)
 
       argument :attributes, type: :array, default: [], banner: 'field:type field:type'
+      class_option :i18n, type: :array, default: [], required: false, desc: 'Translated fields'
 
       def self.next_migration_number(path)
         if @prev_migration_nr
@@ -26,24 +27,36 @@ module SpreeScaffold
       end
 
       def create_views
-        ['index','new','edit','_form'].each do |view|
+        %w[index new edit _form].each do |view|
           template "views/#{view}.html.erb", "app/views/spree/admin/#{plural_name}/#{view}.html.erb"
         end
       end
 
       def create_migrations
-        migration_template 'migration.rb', "db/migrate/create_spree_#{plural_name}.rb"
-        migration_template 'migration_paperclip.rb', "db/migrate/create_spree_#{plural_name}_attachments.rb" if has_attachments?
+        migration_template 'migrations/model.rb', "db/migrate/create_spree_#{plural_name}.rb"
+
+        if has_attachments?
+          migration_template 'migrations/attachments.rb', "db/migrate/create_spree_#{plural_name}_attachments.rb"
+        end
+
+        if i18n?
+          migration_template 'migrations/translations.rb', "db/migrate/create_spree_#{plural_name}_translations.rb"
+        end
       end
 
       def create_locale
-        %w(en it).each do |locale|
+        %w[en it].each do |locale|
           template "locales/#{locale}.yml", "config/locales/#{plural_name}.#{locale}.yml"
         end
       end
 
       def create_deface_override
         template 'overrides/add_to_admin_menu.html.erb.deface', "app/overrides/spree/layouts/admin/add_spree_#{plural_name}.html.erb.deface"
+      end
+
+      def create_translation_template
+        return unless i18n?
+        template 'views/translation_form.html.erb', "app/views/spree/admin/translations/#{singular_name}.html.erb"
       end
 
       def create_routes
@@ -62,6 +75,10 @@ module SpreeScaffold
 
       def slugged?
         self.attributes.find { |a| a.name == 'slug' && a.type == :string }
+      end
+
+      def i18n?
+        options[:i18n].any?
       end
 
       private

@@ -1,5 +1,5 @@
 class CreateSpree<%= class_name.pluralize %> < ActiveRecord::Migration
-  def self.up
+  def up
     create_table :spree_<%= table_name %> do |t|
 <% attributes.each do |attribute| -%>
 <% next if attribute.type == :image || attribute.type == :file -%>
@@ -11,7 +11,7 @@ class CreateSpree<%= class_name.pluralize %> < ActiveRecord::Migration
     end
   end
 
-  def self.down
+  def down
     drop_table :spree_<%= table_name %>
   end
 end
